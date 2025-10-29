@@ -212,41 +212,41 @@ h1, h2, h3, h4, h5, h6, p, a, span {
 <body class="anchor-scroll">
   <header>
     <section id="quote-banner" style="background:#25d695; padding:40px 20px; text-align:center; border-radius:12px;">
-  <blockquote id="quote-text" style="font-size:1.3em; color:#096581; font-style:italic; max-width:700px; margin:auto; transition:opacity 1s ease;">
-    “Mindfulness isn’t difficult. We just need to remember to do it.”
-  </blockquote>
-  <p id="quote-author" style="color:#0f8a5f; font-weight:bold; margin-top:10px; transition:opacity 1s ease;">– Sharon Salzberg</p>
-</section>
-
-<script>
-  const quotes = [
-    { text: "“Mindfulness isn’t difficult. We just need to remember to do it.”", author: "– Sharon Salzberg" },
-    { text: "“The present moment is filled with joy and happiness. If you are attentive, you will see it.”", author: "– Thich Nhat Hanh" },
-    { text: "“The greatest wealth is to live content with little.”", author: "– Plato" },
-    { text: "“You can’t stop the waves, but you can learn to surf.”", author: "– Jon Kabat-Zinn" },
-    { text: "“Simplicity is the ultimate sophistication.”", author: "– Leonardo da Vinci" }
-  ];
-
-  let index = 0;
-  const quoteText = document.getElementById('quote-text');
-  const quoteAuthor = document.getElementById('quote-author');
-
-  setInterval(() => {
-    // fade out
-    quoteText.style.opacity = 0;
-    quoteAuthor.style.opacity = 0;
-
-    setTimeout(() => {
-      index = (index + 1) % quotes.length;
-      quoteText.textContent = quotes[index].text;
-      quoteAuthor.textContent = quotes[index].author;
-
-      // fade in
-      quoteText.style.opacity = 1;
-      quoteAuthor.style.opacity = 1;
-    }, 1000);
-  }, 4000); // changes every 4 seconds
-</script>
+      <blockquote id="quote-text" style="font-size:1.3em; color:#096581; font-style:italic; max-width:700px; margin:auto; transition:opacity 1s ease;">
+        “Mindfulness isn’t difficult. We just need to remember to do it.”
+      </blockquote>
+      <p id="quote-author" style="color:#0f8a5f; font-weight:bold; margin-top:10px; transition:opacity 1s ease;">– Sharon Salzberg</p>
+    </section>
+    
+    <script>
+      const quotes = [
+        { text: "“Mindfulness isn’t difficult. We just need to remember to do it.”", author: "– Sharon Salzberg" },
+        { text: "“The present moment is filled with joy and happiness. If you are attentive, you will see it.”", author: "– Thich Nhat Hanh" },
+        { text: "“The greatest wealth is to live content with little.”", author: "– Plato" },
+        { text: "“You can’t stop the waves, but you can learn to surf.”", author: "– Jon Kabat-Zinn" },
+        { text: "“Simplicity is the ultimate sophistication.”", author: "– Leonardo da Vinci" }
+      ];
+    
+      let index = 0;
+      const quoteText = document.getElementById('quote-text');
+      const quoteAuthor = document.getElementById('quote-author');
+    
+      setInterval(() => {
+        // fade out
+        quoteText.style.opacity = 0;
+        quoteAuthor.style.opacity = 0;
+    
+        setTimeout(() => {
+          index = (index + 1) % quotes.length;
+          quoteText.textContent = quotes[index].text;
+          quoteAuthor.textContent = quotes[index].author;
+    
+          // fade in
+          quoteText.style.opacity = 1;
+          quoteAuthor.style.opacity = 1;
+        }, 1000);
+      }, 4000); // changes every 4 seconds
+    </script>
     </section>
     <div class="top-row">
       <div style="display:flex;gap:12px;align-items:center">
@@ -948,6 +948,4 @@ h1, h2, h3, h4, h5, h6, p, a, span {
     <p style="color:#b6ffb3;">Designed with mindfulness 💚</p>
   </footer>
 </body>
-
 </html>
-
