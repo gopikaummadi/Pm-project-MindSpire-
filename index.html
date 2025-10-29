@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MindSpire – Mindful Living & Mindful Consuming (Deluxe)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+  /* === Fix visibility & overlap issues === */
+
+/* Give opened inner sections a solid background so text behind won't show */
+.modal-content,
+.section-content.active,
+.card-content.active {
+  background-color: rgba(0, 0, 0, 0.8) !important; /* deep translucent black */
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 20px;
+  z-index: 9999 !important;
+}
+
+/* Make sure all text is bright and readable */
+.modal-content *,
+.section-content.active *,
+.card-content.active *,
+.card-content p,
+.card-content h1,
+.card-content h2,
+.card-content h3,
+.card-content h4,
+.card-content li {
+  color: #e9faff !important; /* soft light-blue text */
+}
+
+/* Headings brighter for contrast */
+h1, h2, h3, h4 {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* Paragraphs a bit dimmer */
+p, li, td {
+  color: #d6f8ff !important;
+  line-height: 1.6;
+}
+
+/* Table borders clearer on dark background */
+table, th, td {
+  border: 1px solid rgba(255,255,255,0.4) !important;
+  color: #e9faff !important;
+}
+  /* 🔥 Ultimate fix: readable light text on dark background everywhere */
+body, 
+.section-content *,
+.card-content *,
+.modal-content *,
+div, p, h1, h2, h3, h4, li, span, a, strong {
+  color: #d8f6ff !important; /* light blue text */
+}
+
+/* Headings more highlighted */
+h1, h2, h3, h4 {
+  color: #b3ecff !important; /* brighter cyan for headings */
+  font-weight: 600 !important;
+}
+
+header img {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Bold and link text even brighter */
+strong, a {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Optional: make paragraph text slightly dimmer */
+p, li {
+  color: #cdefff !important;
+}
+
+/* If background inside cards is too dark, lighten them a bit */
+.card-content, .section-content, .modal-content {
+  background-color: rgba(255,255,255,0.05) !important;
+  border-radius: 12px;
+  padding: 12px;
+}
+   :root {
+    --g1: #0a3d2a;   /* deep forest green */
+    --g2: #1a5c3b;   /* darker green */
+    --accent: #82ffa1; /* soft mint highlight */
+    --muted-bg: #001f10; /* dark background */
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --chip: #143d2b;
+    --chat-bot-bg: #002a18;
+    --text-color: #f5fff8; /* light text for contrast */
+}
+
+body {
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+    color: var(--text-color);
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+footer {
+  margin-top: auto;
+}   
+
+h1, h2, h3, h4, h5, h6, p, a, span {
+    color: var(--text-color);
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+    }
+    header{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      padding:26px 20px;
+      background: rgba(0,0,0,0.18);
+      backdrop-filter: blur(6px);
+      position:sticky;
+      top:0;
+      z-index:200;
+    }
+    header .top-row{
+      width:100%;
+      max-width:1100px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    header h1{margin:0;font-size:1.5rem}
+    nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    nav a{color:var(--accent);text-decoration:none;font-weight:700;padding:6px 10px;border-radius:8px;transition:all .18s}
+    nav a:hover{filter:brightness(1.05); transform:translateY(-2px)}
+    .register-btn{
+      background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.18);
+      color:#073d2a;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:800;
+      box-shadow: 0 6px 18px rgba(5,90,52,0.18);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .register-btn:hover{ transform:translateY(-4px); box-shadow: 0 12px 28px rgba(5,90,52,0.28); }
+
+    main{padding:28px 20px 80px; max-width:1100px; margin:0 auto;}
+    section{margin:20px 0;padding:18px 0}
+    h2{color:var(--accent);text-align:center;margin-bottom:16px}
+
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .card{
+      background:var(--card-bg);
+      border-radius:14px;padding:16px;text-align:center;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,0.18);
+      transition: transform .2s, background .2s;
+    }
+    .card:hover{transform:translateY(-6px); background:rgba(255,255,255,0.12)}
+    .card h3{margin:.6rem 0;color:var(--muted-bg)}
+    .card p{margin:0;color:rgba(250,255,250,0.9);font-size:.95rem}
+
+    /* modal */
+    .modal{display:none;position:fixed;inset:0;background:rgba(6,38,20,0.65);z-index:1200;align-items:center;justify-content:center;padding:18px;overflow:auto}
+    .modal[aria-hidden="false"]{display:flex}
+    .modal-content{width:100%;max-width:940px;background:var(--muted-bg);color:#123d2a;border-radius:12px;padding:20px;position:relative;max-height:86vh;overflow:auto}
+    .close-btn{position:absolute;right:14px;top:12px;font-size:22px;cursor:pointer;font-weight:700;color:#333}
+    .modal-content h3{color:var(--g1);margin-top:0}
+    .modal-content h4{margin-bottom:8px}
+    .modal-content p, .modal-content li{color:#333}
+
+    .modal-content table{width:100%;border-collapse:collapse;margin:10px 0}
+    .modal-content table th,.modal-content table td{border:1px solid #ddd;padding:8px;text-align:left;font-size:.95rem}
+
+    /* Chatbot */
+    #chatbot-button{
+      position:fixed;right:20px;bottom:20px;background:var(--muted-bg);color:var(--g1);padding:10px 14px;border-radius:999px;font-weight:800;cursor:pointer;z-index:1300;
+      box-shadow:0 20px 40px rgba(5,60,40,0.18);
+    }
+    #chatbot{display:none;position:fixed;right:20px;bottom:80px;width:360px;height:520px;background:var(--muted-bg);color:#163f2d;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.30);z-index:1300;overflow:hidden;flex-direction:column}
+    #chatbot[aria-hidden="false"]{display:flex}
+    #chatbot header{background:linear-gradient(90deg,var(--g1),var(--g2));color:#06351f;padding:12px;font-weight:800;text-align:center}
+    #chatbot-messages{flex:1;padding:12px;overflow:auto;background:#f8fff8}
+    .msg-user{font-weight:700;margin:8px 0;color:#0a2a1b}
+    .msg-bot{margin:8px 0;color:#06351f;background:var(--chat-bot-bg);padding:8px;border-radius:8px;display:inline-block;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+    #chatbot-controls{display:flex;border-top:1px solid #eef6ee;padding:10px;background:#f9fff9}
+    #chatbot-input{flex:1;padding:10px;border:1px solid #e1f5e6;border-radius:8px;margin-right:8px}
+    #chatbot-send{padding:10px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff;font-weight:700;cursor:pointer}
+
+    /* registration button in nav scroll styling */
+    .anchor-scroll{scroll-behavior:smooth}
+
+    /* registration card button */
+    .submit-btn{background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff;padding:10px;border-radius:8px;border:none;cursor:pointer}
+
+    @media (max-width:720px){
+      header .top-row{flex-direction:column;align-items:center}
+      #chatbot{left:12px;right:12px;width:auto;bottom:90px;height:420px}
+      .modal-content{padding:16px}
+      
+    }
+  </style>
+</head>
+<body class="anchor-scroll">
+  <header>
+    <section id="quote-banner" style="background:#59ad75; padding:40px 20px; text-align:center; border-radius:12px;">
+      <blockquote style="font-size:1.3em; color:#525a86; font-style:italic; max-width:700px; margin:auto;">
+        “Mindfulness isn’t difficult. We just need to remember to do it.”
+      </blockquote>
+      <p style="color:#15afca; font-weight:bold; margin-top:10px;">– Sharon Salzberg</p>
+    </section>
+    </section>
+    <div class="top-row">
+      <div style="display:flex;gap:12px;align-items:center">
+        <header style="display: flex; align-items: center; gap: 12px; padding: 10px 20px;">
+            <img src="imageslogo.png.jpeg" alt="MindSpire Logo" 
+                 style="height: 50px; width: auto; border-radius: 10px;">
+            <h1 style="color: white; font-weight: 600; margin: 0;">
+              MindSpire – Mindful Living & Mindful Consuming
+            </h1>
+          </header>
+      </div>
+      <nav>
+        <a href="#mindful-living">Mindful Living</a>
+        <a href="#mindful-consuming">Mindful Consuming</a>
+        <a href="#resources">Resources</a>
+        <a href="#meet-team">Meet the Team</a>
+        <a href= "#testimonials">Testimonials</a>
+        <a class="register-btn" id="nav-register" href="#register" title="Register Now">Register Now</a>
+      </nav>
+    </div>
+  </header>
+  
+  <script>
+  let score = 0;
+  function showResult() {
+    let resultText = "";
+    if (score >= 3) resultText = "🌿 You’re doing great! Keep practicing mindfulness.";
+    else if (score == 2) resultText = "🌸 You’re on the right path — small steps matter.";
+    else resultText = "💭 It’s never too late to start being mindful today!";
+    document.getElementById("result").innerText = resultText;
+  }
+  </script>
+  <main>
+    <!-- Mindful Living -->
+    <section id="mindful-living">
+      <h2>Mindful Living</h2>
+      <div class="cards">
+        <div class="card" onclick="openModal('healthy-routines')">🌅
+          <h3>Healthy Routines</h3>
+          <p>Morning rituals, daytime habits & evening rest.</p>
+        </div>
+
+        <div class="card" onclick="openModal('wellness-meditation')">🧘
+          <h3>Wellness & Meditation</h3>
+          <p>Daily wellness habits, meditation routines, mental boosters.</p>
+        </div>
+
+        <div class="card" onclick="openModal('balanced-lifestyle')">⚖️
+          <h3>Balanced Lifestyle</h3>
+          <p>Circadian living, mental balance, social + alone time.</p>
+        </div>
+
+        <div class="card" onclick="openModal('college-mentors')">🎓
+          <h3>Help from College Mentors</h3>
+          <p>Why mentors matter & types of mentorship support.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" style="background:#0a3d2a; padding:50px; text-align:center;">
+      <h2 style="color:#0f8a5f;">🧘‍♀️ How Mindful Are You?</h2>
+      <p style="color:#333;">Answer a few quick questions to find out!</p>
+      <div id="quiz-questions" style="max-width:600px; margin:auto; text-align:left; color:#333;">
+        <p>1️⃣ I take time to breathe and notice my thoughts daily.</p>
+        <button onclick="score++">Yes</button> <button>No</button>
+    
+        <p>2️⃣ I make conscious choices about what I buy or eat.</p>
+        <button onclick="score++">Yes</button> <button>No</button>
+    
+        <p>3️⃣ I avoid multitasking and focus on one thing at a time.</p>
+        <button onclick="score++">Yes</button> <button>No</button>
+    
+        <p>4️⃣ I take breaks from my phone or social media.</p>
+        <button onclick="score++">Yes</button> <button>No</button>
+    
+        <br>
+        <button onclick="showResult()" style="background:#0f8a5f; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">
+          See My Result
+        </button>
+        <p id="result" style="margin-top:20px; font-weight:bold;"></p>
+      </div>
+    </section>
+
+    <!-- Mindful Consuming -->
+    <section id="mindful-consuming">
+      <h2>Mindful Consuming</h2>
+      <div class="cards">
+        <div class="card" onclick="openModal('practical-campus')">🛒
+          <h3>Practical Campus Consumption</h3>
+          <p>5 practical ways to consume mindfully on campus.</p>
+        </div>
+
+        <div class="card" onclick="openModal('sustainable-products')">🛍️
+          <h3>Sustainable Products & Lifestyle</h3>
+          <p>Smart swaps, sustainable habits, travel tips.</p>
+        </div>
+
+        <div class="card" onclick="openModal('waste-management')">♻️
+          <h3>Waste Management</h3>
+          <p>Segregation, composting, recycling, e-waste.</p>
+        </div>
+
+        <div class="card" onclick="openModal('eco-innovations')">💡
+          <h3>Eco-friendly Innovations</h3>
+          <p>Biodegradable packaging, solar, green buildings & more.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <!-- 🌿 MINDFUL RESOURCES MAIN SECTION -->
+<section id="resources" style="background:#0a3d2a; padding:60px 20px;">
+  <h1 style="text-align:center; color:#0f8a5f; margin-bottom:30px;">🌱 Mindful Resources</h1>
+  <p style="text-align:center; color:#333; max-width:700px; margin:auto;">
+    Explore curated tools, websites, and videos that support mindful living and conscious consumption.
+  </p>
+
+  <!-- 🧘‍♀️ MINDFUL LIVING RESOURCES -->
+  <div style="margin-top:50px;">
+    <h2 style="color:#0f8a5f; text-align:center;">🧘‍♀️ Mindful Living Resources</h2>
+
+    <!-- Helpful Websites & Apps -->
+    <div style="background:#0a3d2a; padding:30px; border-radius:12px; margin:30px auto; max-width:900px;">
+      <h3 style="color:#0f8a5f;">✨ Websites & Apps</h3>
+      <ul style="list-style:none; padding:0; color:#333; line-height:1.8;">
+        <li>🧠 <a href="https://www.headspace.com/" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Headspace</a> – Guided meditations for stress and focus</li>
+        <li>🌼 <a href="https://www.calm.com/" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Calm</a> – Sleep, relaxation, and mindfulness techniques</li>
+        <li>🌸 <a href="https://www.mindful.org/" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Mindful.org</a> – Articles on presence and mindful habits</li>
+      </ul>
+    </div>
+
+    <!-- YouTube Influencers for Mindful Living -->
+    <div style="background:#0a3d2a; padding:30px; border-radius:12px; margin:30px auto; max-width:900px;">
+      <h3 style="color:#0f8a5f;">🎥 YouTube – Mindful Living Creators</h3>
+      <ul style="list-style:none; padding:0; color:#333; line-height:1.8;">
+        <li>🎬 <a href="https://youtu.be/wAY_9iDrG0k?si=NvOz12QzbJYPKpts" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Ro</a> – On mindfulness, purpose & relationships</li>
+        <li>🌿 <a href="https://www.youtube.com/@MattDAvella" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Matt D’Avella</a> – Minimalism & slow living</li>
+        <li>💖 <a href="https://www.youtube.com/@Lavendaire" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Lavendaire</a> – Self-growth & mindful routines</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 🍃 MINDFUL CONSUMING RESOURCES -->
+  <div style="margin-top:60px;">
+    <h2 style="color:#0f8a5f; text-align:center;">🍃 Mindful Consuming Resources</h2>
+
+    <!-- Helpful Websites -->
+    <div style="background:#0a3d2a; padding:30px; border-radius:12px; margin:30px auto; max-width:900px;">
+      <h3 style="color:#0f8a5f;">🌿 Sustainable Living Websites</h3>
+      <ul style="list-style:none; padding:0; color:#333; line-height:1.8;">
+        <li>♻️ <a href="https://www.ecosia.org/" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Ecosia</a> – Search engine that plants trees</li>
+        <li>🌍 <a href="https://www.earthhero.com/" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          EarthHero</a> – Eco-friendly lifestyle products</li>
+        <li>🛍️ <a href="https://www.goodonyou.eco/" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Good On You</a> – Sustainable fashion ratings and guides</li>
+      </ul>
+    </div>
+
+    <!-- YouTube Influencers for Mindful Consuming -->
+    <div style="background:#0a3d2a; padding:30px; border-radius:12px; margin:30px auto; max-width:900px;">
+      <h3 style="color:#0f8a5f;">🎥 YouTube – Conscious Consuming Creators</h3>
+      <ul style="list-style:none; padding:0; color:#333; line-height:1.8;">
+        <li>🍀 <a href="https://www.youtube.com/@SustainablyVegan" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Sustainably Vegan</a> – Eco-living and zero waste lifestyle</li>
+        <li>🌸 <a href="https://www.youtube.com/@ImmyLucas" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Immy Lucas (Low Impact Movement)</a> – Sustainable habits and consumption</li>
+        <li>🌱 <a href="https://www.youtube.com/@Shelbizleee" target="_blank" style="color:#0f8a5f; text-decoration:none;">
+          Shelbizleee</a> – Mindful consumerism and eco tips</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+    <!-- Our team story -->
+    <section id="Our team story">
+    <section id="story" style="background:#1a5c3b; padding:50px 20px; text-align:center;">
+      <h2 style="color:#0f8a5f;">🌸 Our Story</h2>
+      <p style="max-width:700px; margin:auto; color:#333; line-height:1.8;">
+        MindSpire began as a university initiative by a group of passionate students 
+        who wanted to make mindfulness and conscious consumption part of everyday life. 
+        What started as classroom discussions grew into a mission — to guide others 
+        in finding balance, compassion, and awareness through mindful choices.
+      </p>
+    </section>
+
+    <!-- Meet the Team -->
+    <section id="meet-team">
+      <section id="team" style="text-align:center; padding: 50px 20px;">
+        <h2 style="color: white; font-size: 2em; margin-bottom: 10px;">Meet the Team</h2>
+        <p style="color: #e9faff; font-size: 1.1em; margin-bottom: 30px;">
+          Our dedicated team of student mentors.
+        </p>
+      
+        <!-- 🌿 Team Image -->
+        <img src="rols.jpeg" alt="MindSpire Team Photo"
+             style="width:80%; max-width:700px; border-radius:20px; box-shadow:0 0 20px rgba(255,255,255,0.15);">
+      
+        <!-- Optional team names below -->
+        <p style="color:#d6f8ff; margin-top:20px;">
+          <strong>Team Members:</strong> Ahad, Gopika Naga Sravya, Harshini, Divitha, Manikanta, Jahnavi, Anjali, Amreen
+        </p>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="testimonials" style="background:#145f3a; padding:40px; text-align:center;">
+        <h2 style="color:#0f8a5f;">💭 What People Say</h2>
+        <div style="max-width:700px; margin:auto; color:#333; font-style:italic;">
+          <p>“MindSpire helped me pause, reflect, and reconnect with myself.”</p>
+          <p><strong>– Student, SRM University</strong></p>
+          <hr style="width:40%; margin:20px auto;">
+          <p>“I’ve become more conscious of my habits and feel more in control.”</p>
+          <p><strong>– Student IIMB</strong></p>
+        </div>
+      </section>
+
+    <!-- Register -->
+    <section id="register">
+      <h2>Register Now / Know More</h2>
+      <div class="cards">
+        <div class="card">
+          <form onsubmit="handleRegister(event)" style="text-align:left">
+            <label style="display:block;margin-bottom:8px"><input name="name" type="text" placeholder="Name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6f5ea"></label>
+            <label style="display:block;margin-bottom:8px"><input name="campus" type="text" placeholder="Campus" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6f5ea"></label>
+            <label style="display:block;margin-bottom:8px"><input name="college" type="text" placeholder="College Name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6f5ea"></label>
+            <label style="display:block;margin-bottom:8px"><input name="age" type="number" placeholder="Age" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6f5ea"></label>
+            <label style="display:block;margin-bottom:8px">
+              <select name="gender" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6f5ea">
+                <option value="">Gender</option><option>Female</option><option>Male</option><option>Other</option>
+              </select>
+            </label>
+            <label style="display:block;margin-bottom:8px"><input name="email" type="email" placeholder="Email ID" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6f5ea"></label>
+            <label style="display:block;margin-bottom:12px"><input name="phone" type="tel" placeholder="Contact Number" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6f5ea"></label>
+
+            <button class="submit-btn" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="feedback" style="background:#0a3d2a; padding:40px; text-align:center;">
+      <h2 style="color:#0f8a5f;">💬 Share Your Feedback</h2>
+      <p style="max-width:600px; margin:auto; color:#333;">
+        Tell us how MindSpire helped you or what we can improve!
+      </p>
+      <form style="margin-top:20px;">
+        <input type="text" placeholder="Your Name" required 
+               style="padding:10px; width:60%; border:1px solid #ccc; border-radius:8px; margin:8px;">
+        <br>
+        <textarea placeholder="Your thoughts..." required 
+                  style="padding:10px; width:60%; height:100px; border:1px solid #ccc; border-radius:8px; margin:8px;"></textarea>
+        <br>
+        <button type="submit" 
+                style="background:#0f8a5f; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">
+          Submit
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modals: Healthy Routines -->
+  <div id="healthy-routines" class="modal" aria-hidden="true" role="dialog" aria-labelledby="hr-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('healthy-routines')">&times;</span>
+      <h3 id="hr-title">Healthy Routines</h3>
+
+      <h4>🕰️ Morning Routine</h4>
+      <ul>
+        <li><strong>2 mins Deep Breathing / Meditation</strong> – Start the day with calm.</li>
+        <li><strong>Gratitude Journaling</strong> – Write 3 things you're thankful for.</li>
+        <li><strong>Sunlight + Stretch</strong> – Open your window or step outside + basic stretches.</li>
+        <li><strong>Hydration Ritual</strong> – 1 glass of warm water with lemon or chia seeds.</li>
+      </ul>
+
+      <h4>📱 Daytime Habits</h4>
+      <ul>
+        <li><strong>Mindful Eating</strong> – No screens while eating, chew slowly, enjoy food.</li>
+        <li><strong>Pomodoro with Purpose</strong> – 25-min work, 5-min mindful break (walk, stretch, breathe).</li>
+        <li><strong>Digital Detox Hour</strong> – No phone/social media for 1 hour (pick a time that works).</li>
+      </ul>
+
+      <h4>🌙 Evening Routine</h4>
+      <ul>
+        <li><strong>Reflection Journal</strong> – What went well today? What can improve?</li>
+        <li><strong>Low-Stim Light + No Screens</strong> (30 mins before bed) – Let your brain rest.</li>
+        <li><strong>Sleep Ritual</strong> – Herbal tea + 4-7-8 breathing (inhale 4s, hold 7s, exhale 8s).</li>
+      </ul>
+
+      <h4>🔥 Influencers for Mindful Living</h4>
+      <ul>
+        <li><strong>Jay Shetty</strong> – Former monk, mindfulness coach, podcast host.</li>
+        <li><strong>Mel Robbins</strong> – Motivational speaker, mental fitness advocate.</li>
+        <li><strong>Dr. Nicole LePera</strong> – The Holistic Psychologist.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Wellness & Meditation -->
+  <div id="wellness-meditation" class="modal" aria-hidden="true" role="dialog" aria-labelledby="wm-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('wellness-meditation')">&times;</span>
+      <h3 id="wm-title">Wellness & Meditation</h3>
+
+      <h4>🌅 Daily Wellness Habits</h4>
+      <ul>
+        <li>Wake Up with Nature – Avoid phone for first 30 minutes.</li>
+        <li>Oil Pulling or Tongue Cleaning – Ancient detox ritual, 5 mins max.</li>
+        <li>10-Min Body Movement – Walk, yoga, dance.</li>
+        <li>Eat Whole, Seasonal Foods – Local & fresh &gt; packaged.</li>
+        <li>Stay Hydrated with Purpose – Infuse water with herbs (mint, tulsi, lemon).</li>
+        <li>One Act of Kindness – Small good deed = mood booster.</li>
+      </ul>
+
+      <h4>🧠 Mental Wellness Boosters</h4>
+      <ul>
+        <li>Daily Affirmations – Speak positively to yourself out loud.</li>
+        <li>Screen Time Check-in – Track & limit doomscrolling.</li>
+        <li>Digital Sabbatical (1 day/week) – No social media for 24 hrs.</li>
+        <li>Nature Connect – Spend 15 mins with trees/plants/sky – no phone.</li>
+      </ul>
+
+      <h4>🧘 Meditation Routines (Beginner-Friendly)</h4>
+      <ul>
+        <li>3-Min Guided Meditation – use Calm/Headspace.</li>
+        <li>Box Breathing (4-4-4-4) – inhale-hold-exhale-hold.</li>
+        <li>Gratitude Sit (5 mins) – bring 3 thankful things into focus.</li>
+        <li>Sound Meditation – Tibetan bowl or nature sounds.</li>
+        <li>Walking Meditation – slow, mindful steps.</li>
+      </ul>
+
+      <h4>Top Influencers</h4>
+      <ul>
+        <li>Sadhguru – wisdom + practical spirituality.</li>
+        <li>Dr. Joe Dispenza – neuroscience + meditation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Balanced Lifestyle -->
+  <div id="balanced-lifestyle" class="modal" aria-hidden="true" role="dialog" aria-labelledby="bl-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('balanced-lifestyle')">&times;</span>
+      <h3 id="bl-title">Balanced Lifestyle</h3>
+
+      <h4>Daily Rhythm for a Balanced Life</h4>
+      <ol>
+        <li><strong>Follow a Natural Routine (Circadian Living)</strong>
+          <ul>
+            <li>Wake up with sunlight</li>
+            <li>Eat meals at regular times</li>
+            <li>Sleep early & rise early</li>
+          </ul>
+        </li>
+        <li><strong>Balance Between Doing & Being</strong><br>Action: work/goals. Being: rest/reflection. Rule: 80% output → 20% recharge.</li>
+        <li><strong>Eat. Move. Rest. Repeat.</strong><br>Eat fresh food, move daily, take micro-rests.</li>
+        <li><strong>Mental Balance</strong><br>Limit overthinking, replace "busy" with "present". Journal to declutter.</li>
+        <li><strong>Social + Alone Time</strong><br>Create space for uplifting people and guilt-free alone time.</li>
+      </ol>
+
+      <h4>Recommended Authors / Influencers</h4>
+      <table>
+        <tr><th>Name</th><th>Specialty</th></tr>
+        <tr><td>Robin Sharma</td><td>Leadership & life balance (5AM Club)</td></tr>
+        <tr><td>Kris Carr</td><td>Wellness & life balance</td></tr>
+        <tr><td>Matt D'Avella</td><td>Minimalism & habits</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- College Mentors -->
+  <div id="college-mentors" class="modal" aria-hidden="true" role="dialog" aria-labelledby="cm-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('college-mentors')">&times;</span>
+      <h3 id="cm-title">Help from College Mentors</h3>
+
+      <h4>Why Mentors Matter</h4>
+      <ul>
+        <li>Guidance during stress & decision-making</li>
+        <li>Mental clarity via experience-based advice</li>
+        <li>Safe space to share struggles without judgment</li>
+        <li>Helps balance academic, personal & emotional life</li>
+      </ul>
+
+      <h4>Types of Mentorship Support</h4>
+      <table>
+        <tr><th>Type</th><th>How it Helps</th><th>Example Topics</th></tr>
+        <tr><td>Academic Mentor</td><td>Keeps track of studies & goals</td><td>Time management, exam stress</td></tr>
+        <tr><td>Wellness Mentor</td><td>Focuses on emotional & physical well-being</td><td>Stress, anxiety, routines</td></tr>
+        <tr><td>Peer Mentor</td><td>Relatable senior students</td><td>College life hacks, burnout</td></tr>
+        <tr><td>Faculty Mentor</td><td>Professors with long-term guidance</td><td>Career clarity, purpose</td></tr>
+      </table>
+
+      <h4>Example Contacts</h4>
+      <p>Dr. Aditi Sharma - aditi.sharma@example.com<br>Mr. Rahul Mehta - rahul.mehta@example.com</p>
+    </div>
+  </div>
+
+  <!-- Practical Campus Consumption -->
+  <div id="practical-campus" class="modal" aria-hidden="true" role="dialog" aria-labelledby="pc-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('practical-campus')">&times;</span>
+      <h3 id="pc-title">Practical Campus Consumption</h3>
+
+      <h4>5 Practical Ways to Consume Mindfully</h4>
+      <ol>
+        <li><strong>Buy Only What You Need</strong> — Wait 24 hours for non-essentials.</li>
+        <li><strong>Curate Your Digital Diet</strong> — Follow uplifting content & limit screen time.</li>
+        <li><strong>Eat for Energy, Not Emotion</strong> — Avoid distracted eating.</li>
+        <li><strong>Use Energy Responsibly</strong> — Turn off unused lights/devices.</li>
+        <li><strong>Be Aware of Emotional Consumption</strong> — Journal or walk instead of doomscrolling.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Sustainable Products -->
+  <div id="sustainable-products" class="modal" aria-hidden="true" role="dialog" aria-labelledby="sp-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('sustainable-products')">&times;</span>
+      <h3 id="sp-title">Sustainable Products & Lifestyle</h3>
+
+      <h4>Smart Swaps</h4>
+      <table>
+        <tr><th>Category</th><th>Conventional</th><th>Sustainable Swap</th></tr>
+        <tr><td>Water Bottle</td><td>Plastic</td><td>Steel / Copper Bottle</td></tr>
+        <tr><td>Shopping Bags</td><td>Plastic</td><td>Cloth / Jute Bag</td></tr>
+        <tr><td>Toothbrush</td><td>Plastic</td><td>Bamboo Toothbrush</td></tr>
+        <tr><td>Period Products</td><td>Disposable</td><td>Menstrual Cup / Cloth Pads</td></tr>
+        <tr><td>Notebooks</td><td>Mass paper</td><td>Recycled Paper Journals</td></tr>
+        <tr><td>Cleaning Products</td><td>Chemical</td><td>Plant-based eco products</td></tr>
+        <tr><td>Fashion</td><td>Fast fashion</td><td>Thrift / Organic / Handloom</td></tr>
+      </table>
+
+      <h4>Simple Sustainable Habits</h4>
+      <ul>
+        <li><strong>At Home:</strong> Turn off lights, compost, avoid single-use, fix before discard.</li>
+        <li><strong>Food:</strong> Choose local & seasonal, reduce packaged foods, carry tiffin.</li>
+        <li><strong>Personal Care:</strong> Use refillable & natural products.</li>
+        <li><strong>Travel:</strong> Carpool, cycle, offset carbon when flying.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Waste Management -->
+  <div id="waste-management" class="modal" aria-hidden="true" role="dialog" aria-labelledby="wm2-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('waste-management')">&times;</span>
+      <h3 id="wm2-title">Waste Management</h3>
+
+      <h4>5 Practical Habits</h4>
+      <ol>
+        <li><strong>Segregate Waste Daily</strong> — dry, wet, hazardous/e-waste. Keep 3 labeled bins.</li>
+        <li><strong>Compost Kitchen Waste</strong> — peels, tea leaves become fertilizer.</li>
+        <li><strong>Recycle What You Can</strong> — paper, glass, metal; avoid black plastic.</li>
+        <li><strong>Say No to Single-Use</strong> — carry reusable cutlery, bottle, bag, box.</li>
+        <li><strong>Dispose E-Waste Responsibly</strong> — certified e-waste recyclers or college drives.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Eco Innovations -->
+  <div id="eco-innovations" class="modal" aria-hidden="true" role="dialog" aria-labelledby="ei-title">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('eco-innovations')">&times;</span>
+      <h3 id="ei-title">Eco-friendly Innovations</h3>
+
+      <ul>
+        <li><strong>Biodegradable Packaging</strong> — plant-based, decomposes in weeks.</li>
+        <li><strong>Solar-Powered Gadgets</strong> — lights, chargers, cookers, backpacks.</li>
+        <li><strong>Waterless Products</strong> — powders/tablets reduce plastic.</li>
+        <li><strong>Green Buildings</strong> — recycled materials, natural light, rainwater harvesting.</li>
+        <li><strong>Refill Stations & Zero-Waste Stores</strong> — bring containers to refill.</li>
+        <li><strong>Sustainable Fashion Innovations</strong> — recycled materials, pineapple leaves, coffee waste.</li>
+        <li><strong>E-Bikes & EVs</strong> — reduce emissions; incentives may apply.</li>
+      </ul>
+
+      <h4>Bonus: Innovations from India</h4>
+      <table>
+        <tr><th>Innovation</th><th>Creator/Brand</th><th>What it does</th></tr>
+        <tr><td>PadCare Labs</td><td>Startup</td><td>Sanitary pad recycling tech</td></tr>
+        <tr><td>Phool.co</td><td>IIT Kanpur-backed</td><td>Converts temple flowers into incense</td></tr>
+        <tr><td>Agrocrete Bricks</td><td>Eco startup</td><td>Bricks made from farm waste</td></tr>
+        <tr><td>Gobar Gas Units</td><td>Rural homes</td><td>Turns cow dung into cooking gas</td></tr>
+        <tr><td>Recycled Plastic Roads</td><td>Govt projects</td><td>Roads built using waste plastic</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Chatbot UI -->
+  <div id="chatbot-button" role="button" aria-label="Open chat" onclick="toggleChatbot()">💬 Chat</div>
+
+  <div id="chatbot" aria-hidden="true" role="dialog" aria-labelledby="chat-title">
+    <header id="chat-title">MindSpire Bot</header>
+    <div id="chatbot-messages" aria-live="polite"></div>
+    <div id="chatbot-controls">
+      <input id="chatbot-input" type="text" placeholder="Ask me... (try 'Hi' or 'I'm feeling anxious')" aria-label="Chat input">
+      <button id="chatbot-send" type="button" aria-label="Send message">Send</button>
+    </div>
+  </div>
+
+  <script>
+    /* Modal helpers */
+    function openModal(id){
+      const m = document.getElementById(id);
+      if(!m) return;
+      m.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      const focusable = m.querySelector('button, a, input, [tabindex]');
+      if(focusable) focusable.focus();
+    }
+    function closeModal(id){
+      const m = document.getElementById(id);
+      if(!m) return;
+      m.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+
+    // close modals with Escape and outside click
+    window.addEventListener('keydown', (e)=>{
+      if(e.key==='Escape'){
+        document.querySelectorAll('.modal[aria-hidden="false"]').forEach(m=>{m.setAttribute('aria-hidden','true')});
+        document.body.style.overflow='';
+      }
+    });
+    window.addEventListener('click', (e)=>{
+      document.querySelectorAll('.modal[aria-hidden="false"]').forEach(m=>{
+        if(e.target === m){ m.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+      });
+    });
+
+    /* Chatbot toggling + behavior */
+    function toggleChatbot(){
+      const el = document.getElementById('chatbot');
+      const open = el.getAttribute('aria-hidden') === 'false';
+      if(open){
+        el.setAttribute('aria-hidden','true');
+      } else {
+        el.setAttribute('aria-hidden','false');
+        setTimeout(()=>document.getElementById('chatbot-input').focus(),120);
+      }
+    }
+
+    const messagesEl = document.getElementById('chatbot-messages');
+    function appendUser(text){
+      const d = document.createElement('div'); d.className='msg-user'; d.textContent='You: '+text; messagesEl.appendChild(d);
+    }
+    function appendBot(text){
+      const d = document.createElement('div'); d.className='msg-bot'; d.textContent='Bot: '+text; messagesEl.appendChild(d);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    /* Chatbot conversation state tailored to user's provided short scripts */
+    let lastFlow = null;
+    function sendMessage(){
+      const input = document.getElementById('chatbot-input');
+      const raw = (input.value||'').trim();
+      if(!raw) return;
+      appendUser(raw);
+      input.value='';
+
+      const msg = raw.trim();
+
+      // EXACT scripted flows (match user's PPT lines when possible)
+      // Mindful Living short conversation (exact mapping)
+      if(/^hi$/i.test(msg) && lastFlow !== 'consuming-start'){
+        // If user just says "Hi" — start Mindful Living by default (per user's PPT)
+        lastFlow = 'living-start';
+        appendDelayed("Hey there! 🌼 Welcome to Mindful Living. How are you feeling today?");
+        return;
+      }
+      if(lastFlow === 'living-start' && /anxious|i'?m feeling anxious|i am feeling anxious|feeling anxious/i.test(msg)){
+        lastFlow = 'living-anxious';
+        appendDelayed("I understand 😔. Try this — take a slow deep breath in… and out. You’re doing great. Would you like a small tip to stay calm during the day?");
+        return;
+      }
+      if(lastFlow === 'living-anxious' && /^(yes(,?\s?please)?|please|sure|yep|yeah)$/i.test(msg)){
+        lastFlow = 'living-tip';
+        appendDelayed("Pause for a moment whenever you feel rushed. Notice your breath and surroundings. Even 30 seconds of awareness can reset your mood 🌿.");
+        return;
+      }
+      if(lastFlow === 'living-tip' && /(that really helps|thanks|thank you|thankyou|thx)/i.test(msg)){
+        lastFlow = null;
+        appendDelayed("I’m so glad 💚 Remember, mindfulness is just about being here — now.");
+        return;
+      }
+
+      // Mindful Consuming short conversation (triggered when user explicitly says 'consume' or 'consuming' or 'shop' in the greeting)
+      if(/^(hi|hello|hey)$/i.test(msg) && /consume|consuming|shop|buy|buying/i.test(msg)){
+        lastFlow = 'consuming-start';
+        appendDelayed("Hello 👋 Welcome to Mindful Consuming! Are you trying to shop or eat more consciously?");
+        return;
+      }
+      // Alternative: if user types directly "Hi" then follow living; if user types "Hi" + "consume" later, the consuming flow will trigger from keywords below
+      if(/consume|consuming|shop|buy|buying/i.test(msg) && lastFlow !== 'living-start'){
+        lastFlow = 'consuming-start';
+        appendDelayed("Hello 👋 Welcome to Mindful Consuming! Are you trying to shop or eat more consciously?");
+        return;
+      }
+      if(lastFlow === 'consuming-start' && /stop buying unnecessary|stop buying|stop buying unnecessary things|stop buying things|buying unnecessary/i.test(msg)){
+        lastFlow = 'consuming-advice';
+        appendDelayed("That’s a great step 🌍 Before buying, ask yourself: “Will this add real value to my life or just a moment of excitement?”");
+        return;
+      }
+      if(lastFlow === 'consuming-advice' && /(makes sense|that makes sense|ok|okay|hmm|hm|yes)/i.test(msg)){
+        lastFlow = null;
+        appendDelayed("Exactly 💭 Mindful consuming is about choosing with intention — not impulse. Your small choices create big impact.");
+        return;
+      }
+      if(lastFlow === 'consuming-advice' && /(thanks|thank you|thankyou|thx)/i.test(msg)){
+        lastFlow = null;
+        appendDelayed("Anytime! 🌱 Conscious living starts with mindful decisions — and you’re already on that path.");
+        return;
+      }
+
+      // Keyword fallbacks that keep original site's helpful responses but also map to user's content
+      const m = msg.toLowerCase();
+
+      if(m.includes('routine') || m.includes('morning')){
+        appendDelayed("☀️ Start your day with 2 minutes of deep breathing, sunlight & stretch, gratitude journaling, and a glass of warm water with lemon.");
+        return;
+      }
+      if(m.includes('meditation') || m.includes('wellness') || m.includes('meditate')){
+        appendDelayed("🧘 Try short guided meditations (3–5 mins), box breathing, gratitude sits, daily movement like a 10-min walk or yoga, and nature time.");
+        return;
+      }
+      if(m.includes('balance') || m.includes('lifestyle')){
+        appendDelayed("⚖️ Keep a natural rhythm: wake with sunlight, regular meals, move daily, and allow time for rest and reflection (80/20 recharge rule).");
+        return;
+      }
+      if(m.includes('mentor') || m.includes('mentors') || m.includes('college mentor')){
+        appendDelayed("🎓 Mentors help with stress, decisions, and career clarity. Connect with peer/faculty/wellness mentors on campus for support.");
+        return;
+      }
+      if(m.includes('sustainable') || m.includes('eco') || m.includes('sustainability')){
+        appendDelayed("🌱 Smart swaps: steel/copper bottle, cloth/jute bag, bamboo toothbrush, menstrual cup, recycled notebooks, and plant-based cleaners.");
+        return;
+      }
+      if(m.includes('waste') || m.includes('recycle') || m.includes('compost')){
+        appendDelayed("♻️ Segregate dry/wet/hazardous, compost food scraps, recycle what you can, and avoid single-use plastics.");
+        return;
+      }
+      if(m.includes('innovation') || m.includes('biodegradable') || m.includes('solar')){
+        appendDelayed("💡 Eco innovations: biodegradable packaging, solar-powered gadgets, waterless products, green buildings and refill stations.");
+        return;
+      }
+      if(m.includes('register') || m.includes('signup') || m.includes('sign up')){
+        appendDelayed("📝 To register, click the Register Now button in the top nav or scroll to the Register section and fill the form.");
+        return;
+      }
+      if(m.includes('stress') || m.includes('anxiety') || m.includes('overwhelmed')){
+        appendDelayed("😌 Try 4-7-8 breathing, a 5-minute walk, journaling, or speak to a mentor. Small consistent steps help a lot.");
+        return;
+      }
+
+      // Default helpful prompt
+      appendDelayed("💬 I’m here to help — try asking about 'routines', 'meditation', 'sustainable tips', 'waste', 'project team' or try 'Hi' -> 'I'm feeling anxious'.");
+    }
+
+    // typing realism helper
+    function appendDelayed(text){
+      const t = document.createElement('div'); t.className='msg-bot'; t.textContent='Bot: ...'; messagesEl.appendChild(t);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      setTimeout(()=>{ t.textContent = 'Bot: '+text; messagesEl.scrollTop = messagesEl.scrollHeight; }, 350 + Math.min(900, text.length*7));
+    }
+
+    // Hook Enter + Send button
+    document.getElementById('chatbot-send').addEventListener('click', sendMessage);
+    document.getElementById('chatbot-input').addEventListener('keypress', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); sendMessage(); }
+    });
+
+    // focus input when opening chat
+    document.getElementById('chatbot-button').addEventListener('click', ()=>{
+      setTimeout(()=>document.getElementById('chatbot-input').focus(), 140);
+    });
+
+    // Registration handler (demo)
+    function handleRegister(e){
+      e.preventDefault();
+      alert('Thanks! Your registration has been received. (Demo)');
+      e.target.reset();
+    }
+
+    // smooth scroll if clicking top nav register (works with anchor)
+    document.getElementById('nav-register').addEventListener('click', function(e){
+      // default anchor scroll will scroll because href="#register"
+      // close any open modals for clarity
+      document.querySelectorAll('.modal[aria-hidden="false"]').forEach(m=>m.setAttribute('aria-hidden','true'));
+      document.body.style.overflow='';
+    });
+  </script>
+  <footer style="background-color:#0f8a5f; color:white; text-align:center; padding:20px; margin-top:40px; font-size:0.95em;">
+    <p>© 2025 MindSpire Team — All Rights Reserved</p>
+    <p style="color:#b6ffb3;">Designed with mindfulness 💚</p>
+  </footer>
+</body>
+</html>
